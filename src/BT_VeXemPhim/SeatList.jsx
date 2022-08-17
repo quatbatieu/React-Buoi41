@@ -8,7 +8,7 @@ const SeatList = () => {
   const dispatch = useDispatch();
 
   const handleSelect = (ticketa) => {
-    console.log("ticketa=>>",ticketa)
+    console.log("ticketa=>>", ticketa);
     dispatch({ type: "selectChair", ticketa });
     dispatch({ type: "changeBooked", ticketa });
   };
@@ -22,13 +22,16 @@ const SeatList = () => {
             return (
               <div key={ticket.row}>
                 {ticket.seats.map((ticketa) => {
-                  let ticketing = ticketa.booked === true ? `${scss.chairing}` : "";
-                  let ticketb = ticketa.checked === true ? `${scss.chaired}` : "";
+                  let ticketing =
+                    ticketa.booked === true ? `${scss.chairing}` : "";
+                  let ticketb =
+                    ticketa.checked === true ? `${scss.chaired}` : "";
                   return (
                     <button
                       key={ticketa.name}
-                      className={cn(`${scss.chair} ${ticketing} ${ticketb}`)}
-                      onClick={() => handleSelect({ticketa, row: ticket.row})}
+                      disabled={ticketa.checked}
+                      className={`${scss.chair} ${ticketing} ${ticketb}`}
+                      onClick={() => handleSelect({ ticketa, row: ticket.row })}
                     >
                       {ticketa.name}
                     </button>

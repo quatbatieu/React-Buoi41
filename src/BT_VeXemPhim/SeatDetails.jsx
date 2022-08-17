@@ -4,15 +4,16 @@ import { Button } from "./styles";
 import { useSelector, useDispatch } from "react-redux";
 
 const SeatDetails = () => {
-  const {chaiting } = useSelector((state) => state.cart);
-  const dispatch = useDispatch()
-  const handleRemove = (item) =>{
-    dispatch({type : "removeItem", item})
-  }
-  const handleClear = (chaiting) =>{
-    dispatch ({type : "Disable", chaiting})
+  const { chaiting } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+
+  const handleRemove = (item) => {
+    dispatch({ type: "removeItem", item });
+  };
+  const handleClear = (chaiting) => {
+    dispatch({ type: "Disable", chaiting });
     // dispatch ({type : "Clear", chaiting})
-  }
+  };
   return (
     <div className="container">
       <div className={scss.col1}>
@@ -48,7 +49,7 @@ const SeatDetails = () => {
                   <th>{item.name}</th>
                   <th>{item.price}</th>
                   <th>
-                    <button onClick={() =>handleRemove(item.name)}>X</button>
+                    <button onClick={() => handleRemove(item.name)}>X</button>
                   </th>
                 </tr>
               );
@@ -56,16 +57,20 @@ const SeatDetails = () => {
             <tr>
               <th>Tổng tiền</th>
               <th>
-                {chaiting.reduce((total, item)=>{
-                  return total += item.price 
-                },0).toLocaleString()}
+                {chaiting
+                  .reduce((total, item) => {
+                    return (total += item.price);
+                  }, 0)
+                  .toLocaleString()}
               </th>
             </tr>
           </tbody>
         </table>
         <br />
         <br />
-        <Button variant="primary" onClick={() => handleClear(chaiting)}>ĐẶT VÉ</Button>
+        <Button variant="primary" onClick={() => handleClear(chaiting)}>
+          ĐẶT VÉ
+        </Button>
         {/* <button onClick={() =>handleClear(chaiting)}>ĐẶT VÉ</button> */}
       </div>
     </div>
