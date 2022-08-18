@@ -8,11 +8,16 @@ const SeatDetails = () => {
   const dispatch = useDispatch();
 
   const handleRemove = (item) => {
-    dispatch({ type: "removeItem", item });
+    console.log(item)
+    dispatch({ type: "removeItem", item: item.name });
+    dispatch({ type: "changeBooked", ticketa:{
+      ticketa: item,
+      row: item.name.substr(0,1),
+    } });
   };
   const handleClear = (chaiting) => {
     dispatch({ type: "Disable", chaiting });
-    // dispatch ({type : "Clear", chaiting})
+    // dispatch ({type : "Clear", chaiting}
   };
   return (
     <div className="container">
@@ -49,7 +54,7 @@ const SeatDetails = () => {
                   <th>{item.name}</th>
                   <th>{item.price}</th>
                   <th>
-                    <button onClick={() => handleRemove(item.name)}>X</button>
+                    <button onClick={() => handleRemove(item)}>X</button>
                   </th>
                 </tr>
               );

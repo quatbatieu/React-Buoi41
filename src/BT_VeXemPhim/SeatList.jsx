@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import scss from "./style.module.scss";
-import cn from "classnames";
 
 const SeatList = () => {
   const { tickets } = useSelector((state) => state.cart);

@@ -1,5 +1,3 @@
-
-
 const initialState = {
   tickets: [
     {
@@ -182,11 +180,16 @@ const cartReducer = (state = initialState, action) => {
       const index = state.chaiting.findIndex(
         (item) => item.name === action.ticketa.ticketa.name
       );
+
       if (index === -1) {
         const newChaiting = [...state.chaiting, { ...action.ticketa.ticketa }];
         return { ...state, chaiting: newChaiting };
+      }else {
+        const cloneChair = [...state.chaiting];
+        cloneChair.splice(index,1);
+        return { ...state ,chaiting:cloneChair};
       }
-      return { ...state };
+      
     }
     case "changeBooked": {
       const cloneTickets = [...state.tickets];
@@ -196,7 +199,7 @@ const cartReducer = (state = initialState, action) => {
       const indexFound = cloneTickets[index].seats.findIndex(
         (seat) => seat.name === action.ticketa.ticketa.name
       );
-      cloneTickets[index].seats[indexFound].booked = true;
+      cloneTickets[index].seats[indexFound].booked = !cloneTickets[index].seats[indexFound].booked;
       return { ...state, tickets: cloneTickets };
     }
     case "removeItem": {
@@ -204,6 +207,7 @@ const cartReducer = (state = initialState, action) => {
         (item) => item.name !== action.item
       );
       return { ...state, chaiting: newChaiting };
+      // console.log(chaiting);
     }
     // case "Clear":{
     //   // console.log("clear")
